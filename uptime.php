@@ -4,6 +4,11 @@ function sec2human($time) {
 	$mins = floor($time/60)%60;
 	$hours = floor($time/60/60)%24;
 	$days = floor($time/60/60/24);
+	
+	if ($seconds < 10) { $seconds = '0'.$seconds; }
+	if ($mins < 10) { $mins = '0'.$mins; }
+    	if ($hours < 10) { $hours = '0'.$hours; }
+	
 	return $days > 0 ? $days . ' day'.($days > 1 ? 's' : '') : $hours.':'.$mins.':'.$seconds;
 }
 
@@ -50,9 +55,8 @@ $hddmath = $hddfree / $hddtotal * 100;
 $hdd = round($hddmath) . '%';
 
 if ($hdd >= "51%") { $hddlevel = "success"; }
-elseif ($hdd <= "50%") { $hddlevel = "warning"; }
 elseif ($hdd <= "35%") { $hddlevel = "danger"; }
-
+elseif ($hdd <= "50%") { $hddlevel = "warning"; }
 
 $array['hdd'] = '<div class="progress progress-striped active">
 <div class="bar bar-'.$hddlevel.'" style="width: '.$hdd.';">'.$hdd.'</div>
